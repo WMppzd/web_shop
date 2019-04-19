@@ -35,11 +35,11 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="product_list.htm">手机数码<span class="sr-only">(current)</span></a></li>
-					<li><a href="#">电脑办公</a></li>
-					<li><a href="#">电脑办公</a></li>
-					<li><a href="#">电脑办公</a></li>
+				<ul class="nav navbar-nav" id="menu">
+					<%--<li class="active"><a href="product_list.htm">手机数码<span class="sr-only">(current)</span></a></li>--%>
+					<%--<li><a href="#">电脑办公</a></li>--%>
+					<%--<li><a href="#">电脑办公</a></li>--%>
+					<%--<li><a href="#">电脑办公</a></li>--%>
 				</ul>
 				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">
@@ -51,3 +51,21 @@
 		</div>
 	</nav>
 </div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+	$(function () {
+        var str=''
+        $.post('${pageContext.request.contextPath}/getCategory',
+			function(data){
+            data = JSON.parse(data);
+			    console.log(data.length)
+				for(var i=0;i<data.length;i++){
+			        console.log(i)
+			        str+="<li><a href='#'>"+data[i].cname+"</a></li>"
+				}
+				$('#menu').html(str)
+				console.log(str)
+			}
+		)
+    })
+</script>

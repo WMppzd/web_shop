@@ -3,6 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <welcome-file-list>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>register</servlet-name>
         <servlet-class>com.shop.web.servlet.RegisterServlet</servlet-class>
@@ -26,5 +29,21 @@
     <servlet-mapping>
         <servlet-name>checkUsername</servlet-name>
         <url-pattern>/checkUsername</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>com.shop.web.servlet.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>category</servlet-name>
+        <servlet-class>com.shop.web.servlet.HeaderCategryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>category</servlet-name>
+        <url-pattern>/getCategory</url-pattern>
     </servlet-mapping>
 </web-app>
