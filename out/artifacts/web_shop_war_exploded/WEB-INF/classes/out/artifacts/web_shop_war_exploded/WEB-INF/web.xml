@@ -46,4 +46,12 @@
         <servlet-name>category</servlet-name>
         <url-pattern>/getCategory</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>GetProByCidServlet</servlet-name>
+        <servlet-class>com.shop.web.servlet.GetProByCidServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetProByCidServlet</servlet-name>
+        <url-pattern>/getProByCid</url-pattern>
+    </servlet-mapping>
 </web-app>
