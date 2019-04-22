@@ -61,7 +61,7 @@
 			    console.log(data.length)
 				for(var i=0;i<data.length;i++){
 			        console.log(i)
-			        str+="<li><a href='#'>"+data[i].cname+"</a></li>"
+			        str+="<li><a href='${pageContext.request.contextPath}/getProByCid?cid="+data[i].cid+"'>"+data[i].cname+"</a></li>"
 				}
 				$('#menu').html(str)
 				console.log(str)
