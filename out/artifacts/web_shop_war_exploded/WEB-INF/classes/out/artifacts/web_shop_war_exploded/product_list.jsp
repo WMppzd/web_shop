@@ -43,11 +43,19 @@ body {
 		<c:forEach var="product" items="${pro.list}">
 
 			<div class="col-md-2" style="height: 250px;">
+<<<<<<< HEAD
 				<a href="${pageContext.request.contextPath}/proDetails?pid=${product.pid}&cid=${cid}&currentPage=${pro.currentPage}"> <img src="${pageContext.request.contextPath}/${product.pimage}"
 												 width="170" height="170" style="display: inline-block;">
 				</a>
 				<p>
 					<a href="${pageContext.request.contextPath}/proDetails?pid=${product.pid}&cid=${cid}&currentPage=${pro.currentPage}" style='color: green'>${product.pname}</a>
+=======
+				<a href="${pageContext.request.contextPath}/proDetails?pid=${product.pid}"> <img src="${pageContext.request.contextPath}/${product.pimage}"
+												 width="170" height="170" style="display: inline-block;">
+				</a>
+				<p>
+					<a href="${pageContext.request.contextPath}/proDetails?pid=${product.pid}" style='color: green'>${product.pname}</a>
+>>>>>>> 819f2358c27cb5e171a648aa5b7cc6e1918d693a
 				</p>
 				<p>
 					<font color="#FF0000">商城价：&yen;${product.shop_price}</font>
@@ -118,12 +126,18 @@ body {
 		<div style="overflow: hidden;">
 
 			<ul style="list-style: none;">
+<<<<<<< HEAD
 				<c:forEach items="${his}" var="h_pro">
 					<li
 							style="width: 150px; height: 216; float: left; margin: 0 8px 0 0; padding: 0 18px 15px; text-align: center;"><img
 							src="${pageContext.request.contextPath}/${h_pro.pimage}" width="130px" height="130px" /></li>
 				</c:forEach>
 
+=======
+				<li
+					style="width: 150px; height: 216; float: left; margin: 0 8px 0 0; padding: 0 18px 15px; text-align: center;"><img
+					src="products/1/cs10001.jpg" width="130px" height="130px" /></li>
+>>>>>>> 819f2358c27cb5e171a648aa5b7cc6e1918d693a
 			</ul>
 
 		</div>

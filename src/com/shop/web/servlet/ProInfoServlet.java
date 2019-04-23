@@ -2,20 +2,29 @@ package com.shop.web.servlet;
 
 import com.shop.domain.Product;
 import com.shop.server.IndexService;
+<<<<<<< HEAD
 import com.sun.org.apache.bcel.internal.generic.LLOAD;
 import jdk.nashorn.internal.runtime.ListAdapter;
 import sun.security.ssl.SunJSSE;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
+=======
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+>>>>>>> 819f2358c27cb5e171a648aa5b7cc6e1918d693a
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+=======
+>>>>>>> 819f2358c27cb5e171a648aa5b7cc6e1918d693a
 
 //@WebServlet(name = "ProInfoServlet")
 public class ProInfoServlet extends HttpServlet {
@@ -24,6 +33,7 @@ public class ProInfoServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
         String pid=request.getParameter("pid");
         String cid=request.getParameter("cid");
         String currentPage=request.getParameter("currentPage");
@@ -63,6 +73,12 @@ public class ProInfoServlet extends HttpServlet {
         request.setAttribute("info",product);
         request.setAttribute("cid",cid);
         request.setAttribute("currentPage",currentPage);
+=======
+            String pid=request.getParameter("pid");
+        IndexService indexService=new IndexService();
+        Product product = indexService.getProInfo(pid);
+        request.setAttribute("info",product);
+>>>>>>> 819f2358c27cb5e171a648aa5b7cc6e1918d693a
         request.getRequestDispatcher("product_info.jsp").forward(request,response);
     }
 }
