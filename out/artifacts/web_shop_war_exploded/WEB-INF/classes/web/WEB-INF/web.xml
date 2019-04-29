@@ -62,4 +62,20 @@
         <servlet-name>ProInfoServlet</servlet-name>
         <url-pattern>/proDetails</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Product</servlet-name>
+        <servlet-class>com.shop.web.servlet.ProductAllServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Product</servlet-name>
+        <url-pattern>/Product</url-pattern>
+    </servlet-mapping><servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.shop.web.servlet.UserAllServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
 </web-app>

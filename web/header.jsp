@@ -55,13 +55,13 @@
 <script>
 	$(function () {
         var str=''
-        $.post('${pageContext.request.contextPath}/getCategory',
+        $.post('${pageContext.request.contextPath}/Product?method=getCategory',
 			function(data){
             data = JSON.parse(data);
 			    console.log(data.length)
 				for(var i=0;i<data.length;i++){
 			        console.log(i)
-			        str+="<li><a href='${pageContext.request.contextPath}/getProByCid?cid="+data[i].cid+"'>"+data[i].cname+"</a></li>"
+			        str+="<li><a href='${pageContext.request.contextPath}/Product?method=ProByCid&cid="+data[i].cid+"'>"+data[i].cname+"</a></li>"
 				}
 				$('#menu').html(str)
 				console.log(str)

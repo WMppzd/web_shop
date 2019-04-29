@@ -17,11 +17,11 @@ public class IndexServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        IndexService indexService=new IndexService();
-        List<Product> newPro=indexService.findNewPro();
-        List<Product> hotPro=indexService.findHotPro();
-        request.setAttribute("hotPro",hotPro);
-        request.setAttribute("newPro",newPro);
-        request.getRequestDispatcher("/index.jsp").forward(request,response);
+//        IndexService indexService=new IndexService();
+//        List<Product> newPro=indexService.findNewPro();
+//        List<Product> hotPro=indexService.findHotPro();
+//        request.setAttribute("hotPro",hotPro);
+//        request.setAttribute("newPro",newPro);
+//        request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
 }

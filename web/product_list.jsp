@@ -43,19 +43,19 @@ body {
 		<c:forEach var="product" items="${pro.list}">
 
 			<div class="col-md-2" style="height: 250px;">
-<<<<<<< HEAD
-				<a href="${pageContext.request.contextPath}/proDetails?pid=${product.pid}&cid=${cid}&currentPage=${pro.currentPage}"> <img src="${pageContext.request.contextPath}/${product.pimage}"
+
+				<a href="${pageContext.request.contextPath}/Product?method=getProInfo&pid=${product.pid}&cid=${cid}&currentPage=${pro.currentPage}"> <img src="${pageContext.request.contextPath}/${product.pimage}"
 												 width="170" height="170" style="display: inline-block;">
 				</a>
 				<p>
-					<a href="${pageContext.request.contextPath}/proDetails?pid=${product.pid}&cid=${cid}&currentPage=${pro.currentPage}" style='color: green'>${product.pname}</a>
-=======
-				<a href="${pageContext.request.contextPath}/proDetails?pid=${product.pid}"> <img src="${pageContext.request.contextPath}/${product.pimage}"
-												 width="170" height="170" style="display: inline-block;">
-				</a>
-				<p>
-					<a href="${pageContext.request.contextPath}/proDetails?pid=${product.pid}" style='color: green'>${product.pname}</a>
->>>>>>> 819f2358c27cb5e171a648aa5b7cc6e1918d693a
+					<a href="${pageContext.request.contextPath}/Product?method=getProInfo&pid=${product.pid}&cid=${cid}&currentPage=${pro.currentPage}" style='color: green'>${product.pname}</a>
+
+				<%--<a href="${pageContext.request.contextPath}/Product?method=getProInfo&pid=${product.pid}"> <img src="${pageContext.request.contextPath}/${product.pimage}"--%>
+												 <%--width="170" height="170" style="display: inline-block;">--%>
+				<%--</a>--%>
+				<%--<p>--%>
+					<%--<a href="${pageContext.request.contextPath}/Product?method=getProInfo&pid=${product.pid}" style='color: green'>${product.pname}</a>--%>
+
 				</p>
 				<p>
 					<font color="#FF0000">商城价：&yen;${product.shop_price}</font>
