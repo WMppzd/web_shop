@@ -24,7 +24,13 @@ body {
 }
 </style>
 </head>
-
+<script>
+	function addCar() {
+        //获得购买的商品的数量
+        var buyNum = $("#buyNum").val();
+		location.href="${pageContext.request.contextPath}/Product?method=addShopCar&pid=${info.pid}&num="+buyNum;
+    }
+</script>
 <body>
 	<!-- 引入header.jsp -->
 	<jsp:include page="/header.jsp"></jsp:include>
@@ -69,12 +75,12 @@ body {
 
 						<div
 							style="border-bottom: 1px solid #faeac7; margin-top: 20px; padding-left: 10px;">
-							购买数量: <input id="quantity" name="quantity" value="1"
+							购买数量: <input id="buyNum" name="quantity" value="1"
 								maxlength="4" size="10" type="text">
 						</div>
 
 						<div style="margin: 20px 0 10px 0;; text-align: center;">
-							<a href="cart.htm"> <input
+							<a href="javascript:void(0)" onclick="addCar()"> <input
 								style="background: url('./images/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0); height: 36px; width: 127px;"
 								value="加入购物车" type="button">
 							</a> &nbsp;收藏商品

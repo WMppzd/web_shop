@@ -32,12 +32,12 @@
 		<script>
 			function delPro(pid) {
 				if (confirm("是否确定删除该商品？")){
-				    location.href="${pageContext.request.contextPath}/Product?method=delPro&pid="+pid
+				    location.href("${pageContext.request.contextPath}/Product?method=delPro&pid="+pid)
 				}
             }
             function clearCart() {
                 if (confirm("是否确定清空购物车？")){
-                    location.href="${pageContext.request.contextPath}/Product?method=clearCart"
+                    location.href("${pageContext.request.contextPath}/Product?method=clearCart")
                 }
             }
 		</script>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,6 +29,18 @@
 				padding: 0 10px;
 			}
 		</style>
+		<script>
+			function delPro(pid) {
+				if (confirm("是否确定删除该商品？")){
+				    location.href="${pageContext.request.contextPath}/Product?method=delPro&pid="+pid
+				}
+            }
+            function clearCart() {
+                if (confirm("是否确定清空购物车？")){
+                    location.href="${pageContext.request.contextPath}/Product?method=clearCart"
+                }
+            }
+		</script>
 	</head>
 
 	<body>
@@ -49,27 +62,30 @@
 								<th>小计</th>
 								<th>操作</th>
 							</tr>
+							<c:forEach var="cItem" items="${cart.cartItems}">
+
 							<tr class="active">
 								<td width="60" width="40%">
 									<input type="hidden" name="id" value="22">
-									<img src="./image/dadonggua.jpg" width="70" height="60">
+									<img src="${pageContext.request.contextPath }/${cItem.value.product.pimage}" width="70" height="60">
 								</td>
 								<td width="30%">
-									<a target="_blank"> 有机蔬菜      大冬瓜...</a>
+									<a target="_blank">${cItem.value.product.pname}</a>
 								</td>
 								<td width="20%">
-									￥298.00
+										${cItem.value.product.shop_price}
 								</td>
 								<td width="10%">
-									<input type="text" name="quantity" value="1" maxlength="4" size="10">
+									${cItem.value.buyNum}
 								</td>
 								<td width="15%">
-									<span class="subtotal">￥596.00</span>
+									<span class="subtotal">￥${cItem.value.subTotal}</span>
 								</td>
 								<td>
-									<a href="javascript:;" class="delete">删除</a>
+									<a href="javascript:;" class="delete" onclick="delPro(${cItem.value.product.pid})">删除</a>
 								</td>
 							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -79,10 +95,10 @@
 				<div style="text-align:right;">
 					<em style="color:#ff6600;">
 				登录后确认是否享有优惠&nbsp;&nbsp;
-			</em> 赠送积分: <em style="color:#ff6600;">596</em>&nbsp; 商品金额: <strong style="color:#ff6600;">￥596.00元</strong>
+			</em> 赠送积分: <em style="color:#ff6600;">${cart.total} </em>&nbsp; 商品金额: <strong style="color:#ff6600;">￥${cart.total}元</strong>
 				</div>
 				<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
-					<a href="order_info.htm" id="clear" class="clear">清空购物车</a>
+					<a href="javascript:void(0)" id="clear" class="clear" onclick="clearCart()" >清空购物车</a>
 					<a href="order_info.htm">
 						<input type="submit" width="100" value="提交订单" name="submit" border="0" style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 						height:35px;width:100px;color:white;">

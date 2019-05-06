@@ -1,25 +1,83 @@
 package com.shop.web.servlet;
 
 import com.google.gson.Gson;
-import com.shop.domain.BeanProByCid;
-import com.shop.domain.Category;
-import com.shop.domain.Product;
+import com.shop.domain.*;
 import com.shop.server.IndexService;
 import com.shop.until.JedisPoolUtils;
 import redis.clients.jedis.Jedis;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
 @SuppressWarnings("all")
 //@WebServlet(name = "ProductAllServlet")
 public class ProductAllServlet extends BaseServlet {
+
+//清空购物车
+public  void clearCart(HttpServletRequest request,HttpServletResponse response) throws  ServletException, IOException{
+    HttpSession session=request.getSession();
+    session.removeAttribute("cart");
+    response.sendRedirect(request.getContextPath()+"/cart.jsp");
+}
+
+//删除单个商品
+    public  void delPro(HttpServletRequest request,HttpServletResponse response) throws  ServletException, IOException{
+        String pid =request.getParameter("pid");
+        HttpSession session=request.getSession();
+        Cart cart= (Cart) session.getAttribute("cart");
+        if (cart != null) {
+            Map<String, CartItem> items = cart.getCartItems();
+            cart.setTotal(cart.getTotal()-items.get(pid).getSubTotal());
+            items.remove(pid);
+            cart.setCartItems(items);
+        }
+
+        session.setAttribute("cart",cart);
+        response.sendRedirect(request.getContextPath()+"/cart.jsp");
+    }
+//    添加购物车
+    public void addShopCar(HttpServletRequest request,HttpServletResponse response) throws  ServletException, IOException{
+        String pid=request.getParameter("pid");
+        HttpSession session=request.getSession();
+        int num= Integer.parseInt(request.getParameter("num"));
+        CartItem cartItem=new CartItem();
+        IndexService indexService=new IndexService();
+        Product product=indexService.getProInfo(pid);
+        cartItem.setProduct(product);
+        cartItem.setBuyNum(num);
+        cartItem.setSubTotal(num*product.getShop_price());
+        Cart cart= (Cart) session.getAttribute("cart");
+        double newsubtotal=0.0;
+        if(cart==null){
+            cart=new Cart();
+        }
+        System.out.print(num);
+
+        Map<String, CartItem> items = cart.getCartItems();
+        if(items.containsKey(pid)){
+            CartItem cartItem1=items.get(pid);
+            int oldSubNum=cartItem1.getBuyNum();
+            oldSubNum+=num;
+            cartItem1.setBuyNum(oldSubNum);
+            double oldSubTotal=cartItem1.getSubTotal();
+            oldSubTotal=cartItem1.getSubTotal();
+            newsubtotal =num*product.getShop_price();
+            cartItem1.setSubTotal(oldSubTotal+newsubtotal);
+        }else{
+            cart.getCartItems().put(pid,cartItem);
+            newsubtotal = num*product.getShop_price();
+        };
+        double total=cart.getTotal()+newsubtotal;
+        cart.setTotal(total);
+        session.setAttribute("cart",cart);
+        response.sendRedirect(request.getContextPath()+"/cart.jsp");
+    }
 //获取商品详细信息
     public void getProInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
