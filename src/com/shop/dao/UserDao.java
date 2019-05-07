@@ -3,6 +3,7 @@ package com.shop.dao;
 import com.shop.domain.User;
 import com.shop.until.DataSourceUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
@@ -28,5 +29,12 @@ public class UserDao {
         String sql="select count(*) from user where username=?";
 
         return((Long) queryRunner.query(sql,new ScalarHandler(),username)).intValue();
+    }
+
+    public User login(String username, String password) throws SQLException {
+        QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql="select * from user where username=? and password=?";
+        return queryRunner.query(sql,new BeanHandler<User>(User.class),username,password);
+
     }
 }

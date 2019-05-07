@@ -3,7 +3,9 @@ package com.shop.web.servlet;
 import com.google.gson.Gson;
 import com.shop.domain.*;
 import com.shop.server.IndexService;
+import com.shop.until.CommonUtils;
 import com.shop.until.JedisPoolUtils;
+import org.ietf.jgss.Oid;
 import redis.clients.jedis.Jedis;
 
 import javax.mail.Session;
@@ -18,6 +20,66 @@ import java.util.*;
 @SuppressWarnings("all")
 //@WebServlet(name = "ProductAllServlet")
 public class ProductAllServlet extends BaseServlet {
+
+// 提交订单
+    public  void submitOrder(HttpServletRequest request,HttpServletResponse response) throws  ServletException, IOException{
+        HttpSession session=request.getSession();
+        User user= (User) session.getAttribute("user");
+        if(user==null){
+            response.sendRedirect(request.getContextPath()+"/login.jsp");
+            return;
+        }
+//        封装一个order
+//        private String oid;//该订单的订单号
+//        private Date ordertime;//下单时间
+//        private double total;//该订单的总金额
+//        private int state;//订单支付状态 1代表已付款 0代表未付款
+//
+//        private String address;//收货地址
+//        private String name;//收货人
+//        private String telephone;//收货人电话
+//
+//        private User user;//该订单属于哪个用户
+        Cart cart= (Cart) session.getAttribute("cart");
+
+
+        if(cart!=null){
+            Order order=new Order();
+            String oid = CommonUtils.getId();
+            order.setOid(oid);
+            order.setOrdertime(new Date());
+            order.setTotal(cart.getTotal());
+            order.setState(0);
+            order.setAddress(null);
+            order.setName(null);
+            order.setTelephone(null);
+            order.setUser(user);
+            Map<String, CartItem> cartItem = cart.getCartItems();
+
+//            private String itemid;//订单项的id
+//            private int count;//订单项内商品的购买数量
+//            private double subtotal;//订单项小计
+//            private Product product;//订单项内部的商品
+//            private Order order;//该订单项属于哪个订
+            for (Map.Entry<String,CartItem>entry:cartItem.entrySet()
+                 ) {
+                OrderItems items=new OrderItems();
+                items.setItemid(CommonUtils.getId());
+                items.setCount(entry.getValue().getBuyNum());
+                items.setSubtotal(entry.getValue().getSubTotal());
+                items.setProduct(entry.getValue().getProduct());
+                items.setOrder(order);
+                order.getOrderItems().add(items);
+            }
+            IndexService service=new IndexService();
+            service.submitOrder(order);
+            session.setAttribute("order", order);
+        }
+
+        //页面跳转
+        response.sendRedirect(request.getContextPath()+"/order_info.jsp");
+
+    }
 
 //清空购物车
 public  void clearCart(HttpServletRequest request,HttpServletResponse response) throws  ServletException, IOException{

@@ -3,8 +3,11 @@ package com.shop.server;
 import com.shop.dao.ProductDao;
 import com.shop.domain.BeanProByCid;
 import com.shop.domain.Category;
+import com.shop.domain.Order;
 import com.shop.domain.Product;
+import com.shop.until.DataSourceUtils;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -80,5 +83,28 @@ public class IndexService {
             e.printStackTrace();
         }
         return product;
+    }
+
+    public void submitOrder(Order order) {
+        ProductDao dao=new ProductDao();
+        try {
+            DataSourceUtils.startTransaction();
+            dao.submitOrder(order);
+            dao.addOrderItem(order);
+        } catch (SQLException e) {
+            try {
+                DataSourceUtils.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+        }finally{
+            try {
+                DataSourceUtils.commitAndRelease();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

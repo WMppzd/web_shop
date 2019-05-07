@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-
+@SuppressWarnings("all")
 //@WebServlet(name = "ProInfoServlet")
 public class ProInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -38,4 +38,9 @@ public class UserService {
         }
         return num>0?false:true;
     }
+
+    public User login(String username, String password) throws SQLException {
+        UserDao dao=new UserDao();
+        return dao.login(username,password);
+    }
 }
