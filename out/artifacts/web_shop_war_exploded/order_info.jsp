@@ -83,10 +83,10 @@
 
 	<div>
 		<hr />
-		<form id="orderForm" class="form-horizontal" action="${pageContext.request.contextPath }/product" method="post"
+		<form id="orderForm" class="form-horizontal" action="${pageContext.request.contextPath }/Product" method="post"
 			  style="margin-top: 5px; margin-left: 150px;">
 			<!-- method的名字 通过表单提交 -->
-			<input type="hidden" name="method" value="confirmOrder">
+			<input type="hidden" name="method" value="paymoney">
 			<!-- 传递订单oid -->
 			<input type="hidden" name="oid" value="${order.oid }">
 

@@ -107,4 +107,13 @@ public class IndexService {
         }
 
     }
+
+    public void paypaymoney(Order order)  {
+        ProductDao dao=new ProductDao();
+        try {
+            dao.paypaymoney(order);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

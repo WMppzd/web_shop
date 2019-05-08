@@ -5,21 +5,41 @@ import com.shop.domain.*;
 import com.shop.server.IndexService;
 import com.shop.until.CommonUtils;
 import com.shop.until.JedisPoolUtils;
-import org.ietf.jgss.Oid;
+import org.apache.commons.beanutils.BeanUtils;
 import redis.clients.jedis.Jedis;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.*;
 
 @SuppressWarnings("all")
 //@WebServlet(name = "ProductAllServlet")
 public class ProductAllServlet extends BaseServlet {
+//付款更新状态
+    public  void paymoney(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException {
+        request.setCharacterEncoding("UTF-8");
+        Map<String, String[]> pop = request.getParameterMap();
+        Order order=new Order();
+        try {
+            BeanUtils.populate(order, pop);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        IndexService service=new IndexService();
+        service.paypaymoney(order);
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().println("<h1>付款成功！等待商城进一步操作！等待收货...</h1>");
+    }
+
+
 
 // 提交订单
     public  void submitOrder(HttpServletRequest request,HttpServletResponse response) throws  ServletException, IOException{
